@@ -176,4 +176,6 @@ $$ \hat{T_t} = \frac{1}{m} \sum_{j=-k}^{k} y_{t+j} $$
 
 - https://otexts.com/fppkr/
 - https://velog.io/@phs5145/%EC%8B%9C%EA%B3%84%EC%97%B4-%EC%A0%95%EC%83%81%EC%84%B1%EA%B3%BC-%EB%B9%84%EC%A0%95%EC%83%81%EC%84%B1
-- 추가로 보면 좋을 것: [시계열 이상치 탐지](https://velog.io/@nameunzz/Anomaly-Detection)
+- 추가로 보면 좋을 것: 
+    - [시계열 이상치 탐지](https://velog.io/@nameunzz/Anomaly-Detection)
+    - [시계열 인과관계](https://velog.io/@euisuk-chung/%EA%B0%9C%EB%85%90%EC%A0%95%EB%A6%AC-%EC%8B%9C%EA%B3%84%EC%97%B4-%EB%B6%84%EC%84%9D-%EC%9D%B8%EA%B3%BC%EA%B4%80%EA%B3%84-%EB%B6%84%EC%84%9D)
