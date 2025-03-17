@@ -13,9 +13,5 @@
 ├── 📄 time-series-processing.md  (시계열 데이터 처리 정리)
 ├── 📄 arima-sarima-var.md  (통계적 방법론 정리)
 └── 📂 notebooks/  (실습 코드 저장)
-    ├── 📜 time-series-eda.ipynb
-    └── 📜 arima-example.ipynb
+    └── 📜 time-series-eda.ipynb
 ```
-
-## 사용 데이터
-- d
