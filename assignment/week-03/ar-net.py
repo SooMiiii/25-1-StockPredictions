@@ -59,18 +59,16 @@ class SparseARNet(ARNet):
         c2 (float): 정규화 함수의 두 번째 계수
         l1_lambda (float): L1 정규화 강도
     """
-    def __init__(self, p: int, c1: float = 3.0, c2: float = 3.0, l1_lambda: float = 0.01):
+    def __init__(self, p: int, c1: float = 3.0, c2: float = 3.0):
         """
         Args:
             p (int): 자기회귀 모델의 차수
             c1 (float): 정규화 함수의 첫 번째 계수
             c2 (float): 정규화 함수의 두 번째 계수
-            l1_lambda (float): L1 정규화 강도
         """
         super(SparseARNet, self).__init__(p)
         self.c1 = c1
         self.c2 = c2
-        self.l1_lambda = l1_lambda
     
     def regularization(self) -> torch.Tensor:
         """
