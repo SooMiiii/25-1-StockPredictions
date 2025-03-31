@@ -43,9 +43,14 @@ RNN: 시계열 데이터를 처리하기 위한 모델
     
     ![alt text](images/image-1.png)
     
-    $$\mathbf{h}_t = \tanh(\mathbf{W}_{hh}\mathbf{h}_{t-1} + \mathbf{W}_{xh}\mathbf{x}_t)$$
+    $$
+    \mathbf{h}_t = \tanh(\mathbf{W}_{hh}\mathbf{h}_{t-1} + \mathbf{W}_{xh}\mathbf{x}_t)
+    $$
 
-    $$\frac{\partial \mathbf{h}_t}{\partial \mathbf{h}_{t-1}} = \tanh'(\mathbf{W}_{hh}\mathbf{h}_{t-1} + \mathbf{W}_{xh}\mathbf{x}_t)\mathbf{W}_{hh}$$
+    $$
+    \frac{\partial \mathbf{h}_t}{\partial \mathbf{h}_{t-1}} = \tanh'(\mathbf{W}_{hh}\mathbf{h}_{t-1} + \mathbf{W}_{xh}\mathbf{x}_t)\mathbf{W}_{hh}
+    $$
+
 
     
     ⇒ $h_t$에서 $h_{t-1}$로 backprop시 $W_{hh}$를 곱한다.
