@@ -43,13 +43,13 @@ RNN: 시계열 데이터를 처리하기 위한 모델
     
     ![alt text](images/image-1.png)
     
-$$
-\mathbf{h}_t = \tanh(\mathbf{W}_{hh}\mathbf{h}_{t-1} + \mathbf{W}_{xh}\mathbf{x}_t)
-$$
+    $$
+    \mathbf{h}_t = \tanh(\mathbf{W}_{hh}\mathbf{h}_{t-1} + \mathbf{W}_{xh}\mathbf{x}_t)
+    $$
 
-$$
-\frac{\partial \mathbf{h}_t}{\partial \mathbf{h}_{t-1}} = \tanh'(\mathbf{W}_{hh}\mathbf{h}_{t-1} + \mathbf{W}_{xh}\mathbf{x}_t)\mathbf{W}_{hh}
-$$
+    $$
+    \frac{\partial \mathbf{h}_t}{\partial \mathbf{h}_{t-1}} = \tanh'(\mathbf{W}_{hh}\mathbf{h}_{t-1} + \mathbf{W}_{xh}\mathbf{x}_t)\mathbf{W}_{hh}
+    $$
 
     
     ⇒ $h_t$에서 $h_{t-1}$로 backprop시 $W_{hh}$를 곱한다.
@@ -59,15 +59,16 @@ $$
     - $\hat{y_t}$ : 각 output
     - $L_t$: loss
     
-$$
-\begin{aligned}
-\frac{\partial \mathcal{L}_t}{\partial \mathbf{W}_{h h}} & =\frac{\partial \mathcal{L}_t}{\partial \mathbf{h}_t} \frac{\partial \mathbf{h}_t}{\partial \mathbf{h}_{t-1}} \cdots \frac{\partial \mathbf{h}_2}{\partial \mathbf{h}_1} \frac{\partial \mathbf{h}_1}{\partial \mathbf{W}_{h h}}=\frac{\partial \mathcal{L}_t}{\partial \mathbf{h}_t}\left(\prod_{k=2}^t \frac{\partial \mathbf{h}_k}{\partial \mathbf{h}_{k-1}}\right) \frac{\partial \mathbf{h}_1}{\partial \mathbf{W}_{h h}} \\
-& =\frac{\partial \mathcal{L}_t}{\partial \mathbf{h}_t}\left(\prod_{k=2}^t \tanh ^{\prime}\left(\mathbf{W}_{h h} \mathbf{h}_{k-1}+\mathbf{W}_{x h} \mathbf{x}_k\right) \mathbf{W}_{h h}\right) \frac{\partial \mathbf{h}_1}{\partial \mathbf{W}_{h h}} \\
-& =\frac{\partial \mathcal{L}_t}{\partial \mathbf{h}_t}\left(\prod_{k=2}^t \tanh ^{\prime}\left(\mathbf{W}_{h h} \mathbf{h}_{k-1}+\mathbf{W}_{x h} \mathbf{x}_k\right)\right) \mathbf{W}_{h h}^{t-1} \frac{\partial \mathbf{h}_1}{\partial \mathbf{W}_{h h}}
-\end{aligned}
-$$
+    $$
+    \begin{aligned}
+    \frac{\partial \mathcal{L}_t}{\partial \mathbf{W}_{hh}} &= \frac{\partial \mathcal{L}_t}{\partial \mathbf{h}_t} \frac{\partial \mathbf{h}_t}{\partial \mathbf{h}_{t-1}} \cdots \frac{\partial \mathbf{h}_2}{\partial \mathbf{h}_1} \frac{\partial \mathbf{h}_1}{\partial \mathbf{W}_{hh}} \\
+    &= \frac{\partial \mathcal{L}_t}{\partial \mathbf{h}_t}\left(\prod_{k=2}^t \frac{\partial \mathbf{h}_k}{\partial \mathbf{h}_{k-1}}\right) \frac{\partial \mathbf{h}_1}{\partial \mathbf{W}_{hh}} \\
+    &= \frac{\partial \mathcal{L}_t}{\partial \mathbf{h}_t}\left(\prod_{k=2}^t \tanh^{\prime}\left(\mathbf{W}_{hh} \mathbf{h}_{k-1} + \mathbf{W}_{xh} \mathbf{x}_k\right) \mathbf{W}_{hh}\right) \frac{\partial \mathbf{h}_1}{\partial \mathbf{W}_{hh}} \\
+    &= \frac{\partial \mathcal{L}_t}{\partial \mathbf{h}_t}\left(\prod_{k=2}^t \tanh^{\prime}\left(\mathbf{W}_{hh} \mathbf{h}_{k-1} + \mathbf{W}_{xh} \mathbf{x}_k\right)\right) \mathbf{W}_{hh}^{t-1} \frac{\partial \mathbf{h}_1}{\partial \mathbf{W}_{hh}}
+    \end{aligned}
+    $$
     
-    - tanh`가 항상 1 미만이면 → 기울기 소실
+    - tanh'가 항상 1 미만이면 → 기울기 소실
     - $W_{hh}$: 동일한 행렬의 반복적인 multiplication
         
         ⇒   가장 큰 특이값 > 1 : 기울기 폭발
