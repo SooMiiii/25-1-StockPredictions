@@ -43,12 +43,10 @@ RNN: 시계열 데이터를 처리하기 위한 모델
     
     ![alt text](images/image-1.png)
     
-    $$\mathbf{h}_t = \tanh(\mathbf{W}_{hh}\mathbf{h}_{t-1} + \mathbf{W}_{xh}\mathbf{x}_t)$$
+    $$h_t = \tanh(\mathbf{W}_{hh}h_{t-1} + \mathbf{W}_{xh}\mathbf{x}_t)$$
     
-    $$\frac{\partial \mathbf{h}_t}{\partial \mathbf{h}_{t-1}} = \tanh'(\mathbf{W}_{hh}\mathbf{h}_{t-1} + \mathbf{W}_{xh}\mathbf{x}_t)\mathbf{W}_{hh}$$
+    $$\frac{\partial h_t}{\partial h_{t-1}} = \tanh'(\mathbf{W}_{hh}h_{t-1} + \mathbf{W}_{xh}\mathbf{x}_t)\mathbf{W}_{hh}$$
 
-
-    
     ⇒ $h_t$에서 $h_{t-1}$로 backprop시 $W_{hh}$를 곱한다.
     
 
@@ -56,10 +54,10 @@ RNN: 시계열 데이터를 처리하기 위한 모델
     - $\hat{y_t}$ : 각 output
     - $L_t$: loss
     
-    $$\begin{aligned}\frac{\partial \mathcal{L}_t}{\partial \mathbf{W}_{hh}} &= \frac{\partial \mathcal{L}_t}{\partial \mathbf{h}_t} \frac{\partial \mathbf{h}_t}{\partial \mathbf{h}_{t-1}} \cdots \frac{\partial \mathbf{h}_2}{\partial \mathbf{h}_1} \frac{\partial \mathbf{h}_1}{\partial \mathbf{W}_{hh}} \\
-    &= \frac{\partial \mathcal{L}_t}{\partial \mathbf{h}_t}\left(\prod_{k=2}^t \frac{\partial \mathbf{h}_k}{\partial \mathbf{h}_{k-1}}\right) \frac{\partial \mathbf{h}_1}{\partial \mathbf{W}_{hh}} \\
-    &= \frac{\partial \mathcal{L}_t}{\partial \mathbf{h}_t}\left(\prod_{k=2}^t \tanh^{\prime}\left(\mathbf{W}_{hh} \mathbf{h}_{k-1} + \mathbf{W}_{xh} \mathbf{x}_k\right) \mathbf{W}_{hh}\right) \frac{\partial \mathbf{h}_1}{\partial \mathbf{W}_{hh}} \\
-    &= \frac{\partial \mathcal{L}_t}{\partial \mathbf{h}_t}\left(\prod_{k=2}^t \tanh^{\prime}\left(\mathbf{W}_{hh} \mathbf{h}_{k-1} + \mathbf{W}_{xh} \mathbf{x}_k\right)\right) \mathbf{W}_{hh}^{t-1} \frac{\partial \mathbf{h}_1}{\partial \mathbf{W}_{hh}}
+    $$\begin{aligned}\frac{\partial \mathcal{L}_t}{\partial \mathbf{W}_{hh}} &= \frac{\partial \mathcal{L}_t}{\partial h_t} \frac{\partial h_t}{\partial h_{t-1}} \cdots \frac{\partial h_2}{\partial h_1} \frac{\partial h_1}{\partial \mathbf{W}_{hh}} \\
+    &= \frac{\partial \mathcal{L}_t}{\partial h_t}\left(\prod_{k=2}^t \frac{\partial h_k}{\partial h_{k-1}}\right) \frac{\partial h_1}{\partial \mathbf{W}_{hh}} \\
+    &= \frac{\partial \mathcal{L}_t}{\partial h_t}\left(\prod_{k=2}^t \tanh^{\prime}\left(\mathbf{W}_{hh} h_{k-1} + \mathbf{W}_{xh} \mathbf{x}_k\right) \mathbf{W}_{hh}\right) \frac{\partial h_1}{\partial \mathbf{W}_{hh}} \\
+    &= \frac{\partial \mathcal{L}_t}{\partial h_t}\left(\prod_{k=2}^t \tanh^{\prime}\left(\mathbf{W}_{hh} h_{k-1} + \mathbf{W}_{xh} \mathbf{x}_k\right)\right) \mathbf{W}_{hh}^{t-1} \frac{\partial h_1}{\partial \mathbf{W}_{hh}}
     \end{aligned}$$
     
     - tanh'가 항상 1 미만이면 → 기울기 소실
