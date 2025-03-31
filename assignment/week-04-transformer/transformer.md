@@ -43,9 +43,14 @@ RNN: 시계열 데이터를 처리하기 위한 모델
     
     ![alt text](images/image-1.png)
     
-    $\mathbf{h}_t = \tanh(\mathbf{W}_{hh}\mathbf{h}_{t-1} + \mathbf{W}_{xh}\mathbf{x}_t)$
-    
-    $\frac{\partial \mathbf{h}_t}{\partial \mathbf{h}_{t-1}} = \tanh'(\mathbf{W}_{hh}\mathbf{h}_{t-1} + \mathbf{W}_{xh}\mathbf{x}_t)\mathbf{W}_{hh}$
+    $$
+    \mathbf{h}_t = \tanh(\mathbf{W}_{hh}\mathbf{h}_{t-1} + \mathbf{W}_{xh}\mathbf{x}_t)
+    $$
+
+    $$
+    \frac{\partial \mathbf{h}_t}{\partial \mathbf{h}_{t-1}} = \tanh'(\mathbf{W}_{hh}\mathbf{h}_{t-1} + \mathbf{W}_{xh}\mathbf{x}_t)\mathbf{W}_{hh}
+    $$
+
     
     ⇒ $h_t$에서 $h_{t-1}$로 backprop시 **$W_{hh}$**를 곱한다.
     
@@ -60,7 +65,6 @@ RNN: 시계열 데이터를 처리하기 위한 모델
     & =\frac{\partial \mathcal{L}_t}{\partial \mathbf{h}_t}\left(\prod_{k=2}^t \tanh ^{\prime}\left(\mathbf{W}_{h h} \mathbf{h}_{k-1}+\mathbf{W}_{x h} \mathbf{x}_k\right) \mathbf{W}_{h h}\right) \frac{\partial \mathbf{h}_1}{\partial \mathbf{W}_{h h}} \\
     & =\frac{\partial \mathcal{L}_t}{\partial \mathbf{h}_t}\left(\prod_{k=2}^t \tanh ^{\prime}\left(\mathbf{W}_{h h} \mathbf{h}_{k-1}+\mathbf{W}_{x h} \mathbf{x}_k\right)\right) \mathbf{W}_{h h}^{t-1} \frac{\partial \mathbf{h}_1}{\partial \mathbf{W}_{h h}}
     \end{aligned}
-    
     $$
     
     - tanh`가 항상 1 미만이면 → 기울기 소실
