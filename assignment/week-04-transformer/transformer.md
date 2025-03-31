@@ -43,9 +43,9 @@ RNN: 시계열 데이터를 처리하기 위한 모델
     
     ![alt text](images/image-1.png)
     
-    $$h_t = \tanh(\mathbf{W}_{hh}h_{t-1} + \mathbf{W}_{xh}\mathbf{x}_t)$$
+    $$h_t = tanh(W_{hh}h_{t-1} + W_{xh}x_t)$$
     
-    $$\frac{\partial h_t}{\partial h_{t-1}} = \tanh'(\mathbf{W}_{hh}h_{t-1} + \mathbf{W}_{xh}\mathbf{x}_t)\mathbf{W}_{hh}$$
+    $$\frac{\partial h_t}{\partial h_{t-1}} = \tanh'(W_{hh}h_{t-1} + W_{xh}x_t)W_{hh}$$
 
     ⇒ $h_t$에서 $h_{t-1}$로 backprop시 $W_{hh}$를 곱한다.
     
@@ -54,11 +54,15 @@ RNN: 시계열 데이터를 처리하기 위한 모델
     - $\hat{y_t}$ : 각 output
     - $L_t$: loss
     
-    $$\begin{aligned}\frac{\partial \mathcal{L}_t}{\partial \mathbf{W}_{hh}} &= \frac{\partial \mathcal{L}_t}{\partial h_t} \frac{\partial h_t}{\partial h_{t-1}} \cdots \frac{\partial h_2}{\partial h_1} \frac{\partial h_1}{\partial \mathbf{W}_{hh}} \\
-    &= \frac{\partial \mathcal{L}_t}{\partial h_t}\left(\prod_{k=2}^t \frac{\partial h_k}{\partial h_{k-1}}\right) \frac{\partial h_1}{\partial \mathbf{W}_{hh}} \\
-    &= \frac{\partial \mathcal{L}_t}{\partial h_t}\left(\prod_{k=2}^t \tanh^{\prime}\left(\mathbf{W}_{hh} h_{k-1} + \mathbf{W}_{xh} \mathbf{x}_k\right) \mathbf{W}_{hh}\right) \frac{\partial h_1}{\partial \mathbf{W}_{hh}} \\
-    &= \frac{\partial \mathcal{L}_t}{\partial h_t}\left(\prod_{k=2}^t \tanh^{\prime}\left(\mathbf{W}_{hh} h_{k-1} + \mathbf{W}_{xh} \mathbf{x}_k\right)\right) \mathbf{W}_{hh}^{t-1} \frac{\partial h_1}{\partial \mathbf{W}_{hh}}
-    \end{aligned}$$
+    $$\frac{\partial L_t}{\partial W_{hh}} = \frac{\partial L_t}{\partial h_t} \frac{\partial h_t}{\partial h_{t-1}} \cdots \frac{\partial h_2}{\partial h_1} \frac{\partial h_1}{\partial W_{hh}}$$
+    
+    $$= \frac{\partial L_t}{\partial h_t}\left(\prod_{k=2}^t \frac{\partial h_k}{\partial h_{k-1}}\right) \frac{\partial h_1}{\partial W_{hh}}$$
+    
+    $$= \frac{\partial L_t}{\partial h_t}\left(\prod_{k=2}^t \tanh'\left(W_{hh} h_{k-1} + W_{xh} x_k\right) W_{hh}\right) \frac{\partial h_1}{\partial W_{hh}}$$
+    
+    $$= \frac{\partial L_t}{\partial h_t}\left(\prod_{k=2}^t \tanh'\left(W_{hh} h_{k-1} + W_{xh} x_k\right)\right) W_{hh}^{t-1} \frac{\partial h_1}{\partial W_{hh}}$$
+
+
     
     - tanh'가 항상 1 미만이면 → 기울기 소실
     - $W_{hh}$: 동일한 행렬의 반복적인 multiplication
